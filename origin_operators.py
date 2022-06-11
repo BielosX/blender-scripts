@@ -33,7 +33,7 @@ class GeometryToOriginOperator(bpy.types.Operator):
     @classmethod
     def poll(cls, context):
         active_obj = context.active_object
-        return active_obj is not None
+        return active_obj is not None and active_obj.type == 'MESH'
     
     def execute(self, context):
         active = context.active_object
@@ -54,7 +54,7 @@ class OriginToGeometryOperator(bpy.types.Operator):
     @classmethod
     def poll(cls, context):
         active_obj = context.active_object
-        return active_obj is not None
+        return active_obj is not None and active_obj.type == 'MESH'
     
     def execute(self, context):
         active = context.active_object
