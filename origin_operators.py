@@ -12,6 +12,7 @@ def modify_vertices_position(mesh, vec):
         
     bmesh_plane.to_mesh(mesh)
     bmesh_plane.free()
+    mesh.update()
 
 
 class GeometryToOriginOperator(bpy.types.Operator):
@@ -43,10 +44,12 @@ class GeometryToOriginOperator(bpy.types.Operator):
         
         return {'FINISHED'}
     
+def geometry_to_origin(self, context):
+    self.layout.operator(GeometryToOriginOperator.bl_idname, text=GeometryToOriginOperator.bl_label)
+    
 def register():
     bpy.utils.register_class(GeometryToOriginOperator)
-    bpy.types.VIEW3D_MT_object.append(lambda self, context: self.layout.operator(GeometryToOriginOperator.bl_idname,
-        text=GeometryToOriginOperator.bl_label))
+    bpy.types.VIEW3D_MT_object.append(geometry_to_origin)
     
 if __name__ == "__main__":
     register()
